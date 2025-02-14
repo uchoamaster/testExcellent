@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  mysql_db:
+    image: mysql:latest
+    platform: linux/amd64
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: meubanco
+    ports:
+      - "3306:3306"
+    networks:
+      - app_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    container_name: backend_nest
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=mysql://root:root@mysql_db:3306/meubanco
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+    networks:
+      - app_network
+
+  frontend:
+    build: ./frontend
+    container_name: frontend_react
+    ports:
+      - "3001:3000"
+    depends_on:
+      - backend
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
