@@ -8,6 +8,7 @@
     "start:dev": "nest start --watch",
     "build": "nest build"
   },
+  "proxy": "http://localhost:3002",
   "dependencies": {
     "@nestjs/common": "^11.0.9",
     "@nestjs/config": "^4.0.0",

@@ -15,7 +15,7 @@ function ClientRegistration() {
 
   const fetchClients = async () => {
     try {
-      const response = await axios.get("http://localhost:3002/clientes")
+      const response = await axios.get("/api/clientes")
       setClients(response.data)
     } catch (error) {
       console.error("Erro ao buscar clientes:", error)
