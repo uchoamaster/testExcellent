@@ -9,14 +9,14 @@ import { PedidoModule } from './pedido/pedido.module';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
-      type: 'postgres', // ou 'mysql'
-      host: process.env.DB_HOST || 'localhost',
-      port: parseInt(process.env.DB_PORT ?? '5432', 10),
+      type: 'mysql', // ou 'mysql'
+      host: process.env.DB_HOST || '127.0.0.1',
+      port: parseInt(process.env.DB_PORT ?? '3306', 10),
       username: process.env.DB_USER || 'root',
       password: process.env.DB_PASS || 'root',
-      database: process.env.DB_NAME || 'testeEx',
+      database: process.env.DB_NAME || 'meubanco',
       autoLoadEntities: true,
-      synchronize: true, // Apenas para desenvolvimento
+      synchronize: false, // Apenas para desenvolvimento
     }),
     ClienteModule,
     ProdutoModule,
@@ -24,3 +24,13 @@ import { PedidoModule } from './pedido/pedido.module';
   ],
 })
 export class AppModule {}
+console.log({
+  type: 'mysql', // ou 'mysql'
+  host: process.env.DB_HOST || '127.0.0.1',
+  port:3306, //parseInt(process.env.DB_PORT ?? '3306', 10),
+  username: process.env.DB_USER || 'root',
+  password: process.env.DB_PASS || 'root',
+  database: process.env.DB_NAME || 'meubanco',
+  autoLoadEntities: true,
+  synchronize: false, // Apenas para desenvolvimento
+})

@@ -15,7 +15,7 @@ function ClientRegistration() {
 
   const fetchClients = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/clientes")
+      const response = await axios.get("http://localhost:3002/clientes")
       setClients(response.data)
     } catch (error) {
       console.error("Erro ao buscar clientes:", error)
@@ -29,7 +29,7 @@ function ClientRegistration() {
   const handleCNPJBlur = async () => {
     if (newClient.cnpj.length === 14) {
       try {
-        const response = await axios.get(`http://localhost:3001/clientes/cnpj/${newClient.cnpj}`)
+        const response = await axios.get(`http://localhost:3002/clientes/cnpj/${newClient.cnpj}`)
         setNewClient({
           razaoSocial: response.data.razaoSocial,
           cnpj: response.data.cnpj,
@@ -44,7 +44,7 @@ function ClientRegistration() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await axios.post("http://localhost:3001/clientes", newClient)
+      await axios.post("http://localhost:3002/clientes", newClient)
       setShowModal(false)
       setNewClient({ razaoSocial: "", cnpj: "", email: "" })
       fetchClients()

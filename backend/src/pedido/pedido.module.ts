@@ -8,5 +8,6 @@ import { PedidoController } from './pedido.controller';
   imports: [TypeOrmModule.forFeature([Pedido])],
   controllers: [PedidoController],
   providers: [PedidoService],
+  exports: [PedidoService], 
 })
 export class PedidoModule {}
